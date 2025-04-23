@@ -1,0 +1,12 @@
+/* src/styles/variables.css */
+:root {
+  --color-bg: #0b0f0f;
+  --color-text: #f3f4f4;
+  --color-accent: #a4f3c0;
+  --color-accent-hover: #6bd69e;
+  --color-secondary: #3c4f4b;
+
+  --font-primary: 'Inter', sans-serif;
+  --max-width: 1200px;
+  --padding-section: 4rem 1rem;
+}
