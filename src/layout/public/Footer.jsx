@@ -1,5 +1,29 @@
-import { Box, Container, Typography, Link, Stack, Divider } from '@mui/material';
-import config from '../../config';
+import {
+  Box,
+  Container,
+  Typography,
+  Link,
+  Stack,
+  Divider,
+  Grid,
+  IconButton,
+} from "@mui/material";
+import config from "../../config";
+
+// Iconos sociales (ajusta según tus redes disponibles)
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import EmailIcon from "@mui/icons-material/Email";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
+const iconMap = {
+  github: <GitHubIcon />,
+  linkedin: <LinkedInIcon />,
+  twitter: <TwitterIcon />,
+  email: <EmailIcon />,
+  portfolio: <AccountCircleIcon/>
+};
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -8,63 +32,61 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        mt: 6,
-        pt: 4,
-        pb: 3,
-        borderTop: '1px solid var(--color-secondary)',
-        backgroundColor: 'var(--color-bg)',
-        color: 'var(--color-text)',
+        mt: 10,
+        pt: 6,
+        pb: 4,
+        backgroundColor: "var(--color-bg)",
+        color: "var(--color-text)",
+        borderTop: "1px solid var(--color-secondary)",
       }}
     >
       <Container maxWidth="lg">
-        {/* Nombre y año */}
-        <Typography
-          variant="body2"
-          align="center"
-          sx={{ fontWeight: 500, mb: 1, color: 'text.secondary' }}
-        >
-          © {currentYear} {config.name}. Todos los derechos reservados.
-        </Typography>
+        <Grid container spacing={3} justifyContent="space-between" alignItems="center">
+          {/* Nombre + mensaje final */}
+          <Grid item xs={12} md={6} textAlign={{ xs: "center", md: "left" }}>
+            <Typography variant="subtitle1" fontWeight={600}>
+              {config.name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              © {currentYear} Todos los derechos reservados.
+            </Typography>
+          </Grid>
 
-        {/* Divider decorativo */}
+          {/* Íconos de redes sociales */}
+          <Grid item xs={12} md="auto" textAlign={{ xs: "center", md: "right" }}>
+            <Stack direction="row" spacing={2} justifyContent="center">
+              {Object.entries(config.socialLinks).map(([key, url]) => (
+                <IconButton
+                  key={key}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    color: "var(--color-text)",
+                    transition: "color 0.3s",
+                    "&:hover": {
+                      color: "var(--color-accent-hover)",
+                    },
+                  }}
+                >
+                  {iconMap[key.toLowerCase()] || <Link>{key}</Link>}
+                </IconButton>
+              ))}
+            </Stack>
+          </Grid>
+        </Grid>
+
+        {/* Línea decorativa */}
         <Divider
           sx={{
-            width: 80,
-            height: '3px',
-            mx: 'auto',
-            my: 2,
+            width: "60px",
+            height: "3px",
+            mx: "auto",
+            mt: 4,
             borderRadius: 2,
-            backgroundColor: 'var(--color-accent)',
+            backgroundColor: "var(--color-accent)",
           }}
         />
-
-        {/* Enlaces a redes sociales */}
-        <Stack
-          direction="row"
-          spacing={3}
-          justifyContent="center"
-          sx={{ mt: 1 }}
-        >
-          {Object.entries(config.socialLinks).map(([key, url]) => (
-            <Link
-              key={key}
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              underline="none"
-              sx={{
-                color: 'var(--color-text)',
-                fontWeight: 500,
-                transition: 'color 0.3s',
-                '&:hover': {
-                  color: 'var(--color-accent-hover)',
-                },
-              }}
-            >
-              {key.charAt(0).toUpperCase() + key.slice(1)}
-            </Link>
-          ))}
-        </Stack>
       </Container>
     </Box>
   );
