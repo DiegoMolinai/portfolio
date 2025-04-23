@@ -18,7 +18,7 @@ const config = {
     socialLinks: {
       github: "https://github.com/DiegoMolinai",
       linkedin: "https://www.linkedin.com/in/diego-molina-illanes/",
-      portfolio: "https://diegomolina.dev",
+      portfolio: "https://diegomolinai.github.io/portfolio/",
     },
   };
   

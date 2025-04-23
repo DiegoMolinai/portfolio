@@ -1,5 +1,5 @@
 {
-  "name": "mi-portafolio",
+  "name": "portfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -31,7 +31,8 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
-    "vite": "^6.2.0"
+    "vite": "^6.2.0",
+    "vite-plugin-gh-pages": "^1.0.1"
   },
-  "homepage":  "https://diegomolinai.github.io/portfolio"
+  "homepage": "https://diegomolinai.github.io/portfolio"
 }

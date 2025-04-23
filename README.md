@@ -18,14 +18,14 @@ Bienvenido a mi portafolio personal de desarrollo web. Este sitio ha sido creado
 
 ---
 
-## 📬 Contacto
+<!-- ## 📬 Contacto
 
 Puedes contactarme desde la sección de contacto del sitio o por:
 
-- 📧 Email: [tu-email@ejemplo.com](mailto:tu-email@ejemplo.com)
+- 📧 Email: [tu-email@ejemplo.com](mailto:diegomolinai@outlook.com)
 - 🌐 Sitio: [https://tuusuario.github.io/full-stack-portfolio](https://tuusuario.github.io/full-stack-portfolio)
 
----
+--- -->
 
 ## 🖼️ Capturas
 
