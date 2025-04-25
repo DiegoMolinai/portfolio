@@ -15,14 +15,14 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import EmailIcon from "@mui/icons-material/Email";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const iconMap = {
   github: <GitHubIcon />,
   linkedin: <LinkedInIcon />,
   twitter: <TwitterIcon />,
   email: <EmailIcon />,
-  portfolio: <AccountCircleIcon/>
+  portfolio: <AccountCircleIcon />,
 };
 
 const Footer = () => {
@@ -41,9 +41,18 @@ const Footer = () => {
       }}
     >
       <Container maxWidth="lg">
-        <Grid container spacing={3} justifyContent="space-between" alignItems="center">
+        <Grid
+          container
+          spacing={3}
+          justifyContent="space-between"
+          alignItems="center"
+        >
           {/* Nombre + mensaje final */}
-          <Grid item xs={12} md={6} textAlign={{ xs: "center", md: "left" }}>
+          <Grid
+            item
+            size={{ xs: 12, md: 6 }}
+            textAlign={{ xs: "center", md: "left" }}
+          >
             <Typography variant="subtitle1" fontWeight={600}>
               {config.name}
             </Typography>
@@ -53,7 +62,12 @@ const Footer = () => {
           </Grid>
 
           {/* Íconos de redes sociales */}
-          <Grid item xs={12} md="auto" textAlign={{ xs: "center", md: "right" }}>
+          <Grid
+            item
+            size={{ xs: 12 }}
+            md="auto"
+            textAlign={{ xs: "center", md: "right" }}
+          >
             <Stack direction="row" spacing={2} justifyContent="center">
               {Object.entries(config.socialLinks).map(([key, url]) => (
                 <IconButton

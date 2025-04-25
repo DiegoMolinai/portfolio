@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -12,20 +12,20 @@ import {
   ListItemButton,
   ListItemText,
   ListItemIcon,
-  Container,
   useTheme,
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home';
-import PersonIcon from '@mui/icons-material/Person';
-import WorkIcon from '@mui/icons-material/Work';
-import MailIcon from '@mui/icons-material/Mail';
-
-import config from '../../config';
+  Container,
+  Divider,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import PersonIcon from "@mui/icons-material/Person";
+import WorkIcon from "@mui/icons-material/Work";
+import MailIcon from "@mui/icons-material/Mail";
+import config from "../../config";
 
 const iconMap = {
   inicio: <HomeIcon />,
-  'sobre mí': <PersonIcon />,
+  "sobre mí": <PersonIcon />,
   proyectos: <WorkIcon />,
   contacto: <MailIcon />,
 };
@@ -36,71 +36,77 @@ const Header = () => {
   const theme = useTheme();
 
   const scrollToSection = (id) => {
-    const sectionId = id.toLowerCase().replace(/\s/g, '');
+    const sectionId = id.toLowerCase().replace(/\s/g, "");
     const element = document.getElementById(sectionId);
-
     setOpen(false);
     setTimeout(() => {
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 250);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }, 200);
   };
 
   return (
     <>
+      {/* 🌐 APP BAR */}
       <AppBar
         position="sticky"
         sx={{
-          width: '100%',
-          backgroundColor: 'rgba(11, 15, 15, 0.9)',
-          backdropFilter: 'blur(8px)',
-          borderBottom: '2px solid var(--color-accent)',
-          boxShadow: '0px 2px 10px rgba(0,0,0,0.3)',
+          backgroundColor: "rgba(11, 15, 15, 0.85)",
+          backdropFilter: "blur(8px)",
+          borderBottom: "2px solid var(--color-accent)",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.25)",
           zIndex: 1100,
         }}
       >
         <Container maxWidth="lg">
-          <Toolbar disableGutters sx={{ justifyContent: 'space-between', minHeight: '64px' }}>
+          <Toolbar
+            disableGutters
+            sx={{ justifyContent: "space-between", minHeight: "64px" }}
+          >
+            {/* 🔹 Logo / Nombre */}
             <Typography
               variant="h6"
               fontWeight={700}
               noWrap
               sx={{
-                color: 'var(--color-accent)',
-                letterSpacing: '0.5px',
-                fontSize: '1.2rem',
+                color: "var(--color-accent)",
+                letterSpacing: "0.8px",
+                fontSize: "1.3rem",
               }}
             >
               {config.name}
             </Typography>
 
-            {/* Desktop buttons */}
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 2 }}>
+            {/* 🔹 Web Nav */}
+            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
               {sections.map((section) => (
                 <Button
                   key={section}
                   onClick={() => scrollToSection(section)}
                   sx={{
-                    color: 'var(--color-text)',
-                    textTransform: 'none',
-                    fontWeight: 500,
-                    position: 'relative',
-                    '&::after': {
+                    color: "var(--color-text)",
+                    textTransform: "none",
+                    fontWeight: 600,
+                    fontSize: "1rem",
+                    position: "relative",
+                    padding: "6px 12px",
+                    borderRadius: "8px",
+                    transition: "all 0.3s ease",
+                    "&::before": {
                       content: '""',
-                      position: 'absolute',
+                      position: "absolute",
                       bottom: 0,
                       left: 0,
-                      width: 0,
-                      height: '2px',
-                      backgroundColor: 'var(--color-accent)',
-                      transition: 'width 0.3s ease-in-out',
+                      width: "0%",
+                      height: "2px",
+                      backgroundColor: "var(--color-accent)",
+                      transition: "width 0.3s",
                     },
-                    '&:hover::after': {
-                      width: '100%',
+                    "&:hover::before": {
+                      width: "100%",
                     },
-                    '&:hover': {
-                      color: 'var(--color-accent)',
+                    "&:hover": {
+                      color: "var(--color-accent)",
+                      backgroundColor: "rgba(255,255,255,0.04)",
                     },
                   }}
                 >
@@ -109,12 +115,12 @@ const Header = () => {
               ))}
             </Box>
 
-            {/* Mobile hamburger */}
+            {/* 🔹 Mobile menu */}
             <IconButton
               edge="end"
               color="inherit"
               onClick={() => setOpen(true)}
-              sx={{ display: { xs: 'flex', md: 'none' } }}
+              sx={{ display: { xs: "flex", md: "none" } }}
               aria-label="Abrir menú"
             >
               <MenuIcon />
@@ -123,22 +129,33 @@ const Header = () => {
         </Container>
       </AppBar>
 
-      {/* Mobile Drawer */}
+      {/* 📱 DRAWER MOBILE */}
       <Drawer
         anchor="right"
         open={open}
         onClose={() => setOpen(false)}
         PaperProps={{
           sx: {
-            backgroundColor: 'var(--color-bg)',
-            borderLeft: '2px solid var(--color-accent)',
-            width: 240,
-            color: 'var(--color-text)',
-            pt: 4,
+            backgroundColor: "var(--color-bg)",
+            borderLeft: "2px solid var(--color-accent)",
+            width: 260,
+            color: "var(--color-text)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            pt: 2,
           },
         }}
       >
-        <Box role="presentation" sx={{ mt: 8 }}>
+        <Box role="presentation" sx={{ px: 2 }}>
+          <Typography
+            variant="h6"
+            fontWeight={700}
+            sx={{ textAlign: "center", mb: 2, color: "var(--color-accent)" }}
+          >
+            Navegación
+          </Typography>
+          <Divider sx={{ mb: 2, backgroundColor: "var(--color-accent)" }} />
           <List>
             {sections.map((section) => {
               const key = section.toLowerCase();
@@ -147,14 +164,17 @@ const Header = () => {
                   <ListItemButton
                     onClick={() => scrollToSection(section)}
                     sx={{
-                      '&:hover': {
-                        backgroundColor: 'var(--color-secondary)',
-                      },
-                      px: 3,
+                      borderRadius: 2,
+                      px: 2,
                       py: 1.5,
+                      transition: "all 0.2s ease",
+                      "&:hover": {
+                        backgroundColor: "var(--color-secondary)",
+                        transform: "scale(1.02)",
+                      },
                     }}
                   >
-                    <ListItemIcon sx={{ color: 'var(--color-accent)', minWidth: 36 }}>
+                    <ListItemIcon sx={{ color: "var(--color-accent)" }}>
                       {iconMap[key] || <MenuIcon />}
                     </ListItemIcon>
                     <ListItemText primary={section} />

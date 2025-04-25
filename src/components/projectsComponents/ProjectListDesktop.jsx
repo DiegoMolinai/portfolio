@@ -16,7 +16,7 @@ import FadeInSection from "../FadeInSection";
 
 const ProjectListDesktop = ({ projects, handleOpenDialog }) => {
   return (
-    <Grid container spacing={4} justifyContent="space-around">
+    <Grid container spacing={2} justifyContent="space-around">
       {projects.map((project, index) => {
         const hasImage = project.image && project.image !== "";
 

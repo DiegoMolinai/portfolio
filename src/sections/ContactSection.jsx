@@ -122,7 +122,7 @@ const ContactSection = () => {
           container
           spacing={4}
           alignItems="stretch"
-          sx={{ minHeight: "500px" }}
+          sx={{ minHeight: "500px" }} // 👈 fuerza igual altura
         >
           {/* 📝 Formulario */}
           <Grid item size={{ xs: 12, md: 6 }} sx={{ height: "100%" }}>
@@ -131,6 +131,7 @@ const ContactSection = () => {
                 elevation={3}
                 sx={{
                   height: "100%",
+                  minHeight: "500px",
                   padding: 4,
                   borderRadius: 3,
                   backgroundColor: "#1e1e1e",
@@ -219,7 +220,8 @@ const ContactSection = () => {
             <FadeInSection type="fadeScale" delay={0.4}>
               <Box
                 sx={{
-                  height: "100%", // Para igualar altura
+                  height: "100%",
+                  minHeight: "500px",
                   borderRadius: 3,
                   overflow: "hidden",
                   position: "relative",
@@ -227,9 +229,9 @@ const ContactSection = () => {
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   display: "flex",
-                  alignItems: "flex-end",
-                  justifyContent: "center",
-                  border: "4px solid var(--color-accent)",
+                  flexDirection: "column",
+                  justifyContent: "flex-end", // o center si prefieres
+                  border: "2px solid var(--color-accent)",
                 }}
               >
                 <Box
