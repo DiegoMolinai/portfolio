@@ -9,6 +9,8 @@ import {
   Link,
   Alert,
   CircularProgress,
+  Grid,
+  Paper,
 } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -16,6 +18,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import config from "../config";
 import FadeInSection from "../components/FadeInSection";
 import { useState } from "react";
+import ContactImage from "../../public/assets/ContactImage.jpg"; // ⚠️ Asegúrate que esta ruta sea válida
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -94,7 +97,7 @@ const ContactSection = () => {
         color: "var(--color-text)",
       }}
     >
-      <Container maxWidth="sm">
+      <Container maxWidth="lg">
         <FadeInSection type="fadeIn">
           <Typography
             variant="h4"
@@ -113,117 +116,161 @@ const ContactSection = () => {
               borderRadius: "6px",
             }}
           />
-          <Typography variant="body1" textAlign="center" sx={{ mb: 4 }}>
-            ¿Tienes un proyecto en mente o quieres trabajar conmigo? ¡Envíame un
-            mensaje!
-          </Typography>
         </FadeInSection>
 
-        <FadeInSection type="slideLeft" delay={0.2}>
-          <form onSubmit={handleSubmit}>
-            <Stack spacing={2}>
-              <TextField
-                fullWidth
-                label="Nombre"
-                name="name"
-                variant="outlined"
-                color="success"
-                value={formData.name}
-                onChange={handleChange}
-                error={!!errors.name}
-                helperText={errors.name}
-              />
-              <TextField
-                fullWidth
-                label="Correo electrónico"
-                name="email"
-                variant="outlined"
-                color="success"
-                value={formData.email}
-                onChange={handleChange}
-                error={!!errors.email}
-                helperText={errors.email}
-              />
-              <TextField
-                fullWidth
-                label="Mensaje"
-                name="message"
-                multiline
-                rows={4}
-                variant="outlined"
-                color="success"
-                value={formData.message}
-                onChange={handleChange}
-                error={!!errors.message}
-                helperText={errors.message}
-              />
+        <Grid
+          container
+          spacing={4}
+          alignItems="stretch"
+          sx={{ minHeight: "500px" }}
+        >
+          {/* 📝 Formulario */}
+          <Grid item size={{ xs: 12, md: 6 }} sx={{ height: "100%" }}>
+            <FadeInSection type="slideLeft" delay={0.2}>
+              <Paper
+                elevation={3}
+                sx={{
+                  height: "100%",
+                  padding: 4,
+                  borderRadius: 3,
+                  backgroundColor: "#1e1e1e",
+                  border: "2px solid var(--color-accent)",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                }}
+              >
+                <Typography variant="body1" sx={{ mb: 3 }}>
+                  ¿Tienes un proyecto en mente? ¡Cuéntamelo! 🚀
+                </Typography>
 
-              {loading ? (
-                <Button fullWidth variant="contained" color="success" disabled>
-                  <CircularProgress size={24} color="inherit" />
-                </Button>
-              ) : (
-                <Button
-                  fullWidth
-                  variant="contained"
-                  color="success"
-                  type="submit"
+                <form onSubmit={handleSubmit}>
+                  <Stack spacing={2}>
+                    <TextField
+                      fullWidth
+                      label="Nombre"
+                      name="name"
+                      variant="outlined"
+                      color="success"
+                      value={formData.name}
+                      onChange={handleChange}
+                      error={!!errors.name}
+                      helperText={errors.name}
+                    />
+                    <TextField
+                      fullWidth
+                      label="Correo electrónico"
+                      name="email"
+                      variant="outlined"
+                      color="success"
+                      value={formData.email}
+                      onChange={handleChange}
+                      error={!!errors.email}
+                      helperText={errors.email}
+                    />
+                    <TextField
+                      fullWidth
+                      label="Mensaje"
+                      name="message"
+                      multiline
+                      rows={4}
+                      variant="outlined"
+                      color="success"
+                      value={formData.message}
+                      onChange={handleChange}
+                      error={!!errors.message}
+                      helperText={errors.message}
+                    />
+
+                    {loading ? (
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        color="success"
+                        disabled
+                      >
+                        <CircularProgress size={24} color="inherit" />
+                      </Button>
+                    ) : (
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        color="success"
+                        type="submit"
+                      >
+                        Enviar mensaje
+                      </Button>
+                    )}
+
+                    {successMessage && (
+                      <Alert severity="success">{successMessage}</Alert>
+                    )}
+                    {errorMessage && (
+                      <Alert severity="error">{errorMessage}</Alert>
+                    )}
+                  </Stack>
+                </form>
+              </Paper>
+            </FadeInSection>
+          </Grid>
+
+          {/* 🖼️ Imagen con info */}
+          <Grid item size={{ xs: 12, md: 6 }} sx={{ height: "100%" }}>
+            <FadeInSection type="fadeScale" delay={0.4}>
+              <Box
+                sx={{
+                  height: "100%", // Para igualar altura
+                  borderRadius: 3,
+                  overflow: "hidden",
+                  position: "relative",
+                  backgroundImage: `url(${ContactImage})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  display: "flex",
+                  alignItems: "flex-end",
+                  justifyContent: "center",
+                  border: "4px solid var(--color-accent)",
+                }}
+              >
+                <Box
+                  sx={{
+                    width: "100%",
+                    backgroundColor: "rgba(0,0,0,0.6)",
+                    p: 3,
+                    color: "#fff",
+                  }}
                 >
-                  Enviar
-                </Button>
-              )}
-
-              {successMessage && (
-                <Alert severity="success">
-                  ✉️ Tu mensaje ha sido enviado correctamente. Tratare de responder a la brevedad. ¡Gracias por contactarme!
-                </Alert>
-              )}
-
-              {errorMessage && (
-                <Alert severity="error">
-                  ⚠️ Ocurrió un problema al enviar tu mensaje. Por favor,
-                  intenta nuevamente o contacta por otro medio.
-                </Alert>
-              )}
-            </Stack>
-          </form>
-        </FadeInSection>
-
-        <FadeInSection type="fadeScale" delay={0.4}>
-          <Box textAlign="center" mt={6}>
-            <Typography variant="body2" sx={{ mb: 1 }}>
-              También puedes encontrarme en:
-            </Typography>
-            <Stack
-              direction="row"
-              spacing={3}
-              justifyContent="center"
-              flexWrap="wrap"
-            >
-              <Link
-                href={`mailto:${config.email}`}
-                target="_blank"
-                color="inherit"
-              >
-                <EmailIcon fontSize="large" />
-              </Link>
-              <Link
-                href={config.socialLinks.github}
-                target="_blank"
-                color="inherit"
-              >
-                <GitHubIcon fontSize="large" />
-              </Link>
-              <Link
-                href={config.socialLinks.linkedin}
-                target="_blank"
-                color="inherit"
-              >
-                <LinkedInIcon fontSize="large" />
-              </Link>
-            </Stack>
-          </Box>
-        </FadeInSection>
+                  <Typography variant="h6" fontWeight={600}>
+                    ¡Conectemos!
+                  </Typography>
+                  <Typography variant="body2" sx={{ mb: 2 }}>
+                    Estoy disponible para proyectos freelance, colaboraciones y
+                    desafíos creativos.
+                  </Typography>
+                  <Stack direction="row" spacing={2}>
+                    <Link href={`mailto:${config.email}`} color="inherit">
+                      <EmailIcon />
+                    </Link>
+                    <Link
+                      href={config.socialLinks.github}
+                      target="_blank"
+                      color="inherit"
+                    >
+                      <GitHubIcon />
+                    </Link>
+                    <Link
+                      href={config.socialLinks.linkedin}
+                      target="_blank"
+                      color="inherit"
+                    >
+                      <LinkedInIcon />
+                    </Link>
+                  </Stack>
+                </Box>
+              </Box>
+            </FadeInSection>
+          </Grid>
+        </Grid>
       </Container>
     </Box>
   );

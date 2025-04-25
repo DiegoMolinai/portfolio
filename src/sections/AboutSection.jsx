@@ -6,14 +6,19 @@ import {
   Grid,
   Stack,
   Chip,
+  useMediaQuery,
 } from "@mui/material";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import { useTheme } from "@mui/material/styles";
 import config from "../config";
 import FadeInSection from "../components/FadeInSection";
 
 const AboutSection = () => {
   const imageSrc = "./assets/about-image.png";
   const hasImage = imageSrc !== "" && imageSrc !== null;
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Box
@@ -51,10 +56,11 @@ const AboutSection = () => {
           spacing={6}
           alignItems="center"
           justifyContent="center"
-          sx={{ minHeight: { md: "60vh" } }} // le da altura mínima para que se vea más equilibrado
+          direction={isMobile ? "column" : "row"}
+          sx={{ minHeight: { md: "60vh" } }}
         >
           {/* Imagen o ícono */}
-          <Grid item xs={12} md={5}>
+          <Grid item size={{ xs: 12, md: 5 }}>
             <FadeInSection type="fadeScale" delay={0.2}>
               {hasImage ? (
                 <Box
@@ -65,7 +71,7 @@ const AboutSection = () => {
                     width: "100%",
                     maxWidth: 400,
                     mx: "auto",
-                    border:"4px solid var(--color-accent)",
+                    border: "4px solid var(--color-accent)",
                     borderRadius: 4,
                     boxShadow: "0px 10px 25px rgba(0,0,0,0.2)",
                     display: "block",
@@ -73,16 +79,27 @@ const AboutSection = () => {
                 />
               ) : (
                 <PersonOutlineIcon
-                  sx={{ fontSize: 120, color: "var(--color-accent)" }}
+                  sx={{
+                    fontSize: 120,
+                    color: "var(--color-accent)",
+                    display: "block",
+                    mx: "auto",
+                  }}
                 />
               )}
             </FadeInSection>
           </Grid>
 
           {/* Contenido textual */}
-          <Grid item xs={12} md={7}>
+          <Grid item size={{ xs: 12, md: 7 }}>
             <FadeInSection type="slideLeft" delay={0.3}>
-              <Box sx={{ maxWidth: "600px", margin: "0 auto" }}>
+              <Box
+                sx={{
+                  maxWidth: "600px",
+                  mx: "auto",
+                  mt: { xs: 4, md: 0 },
+                }}
+              >
                 <Stack spacing={3}>
                   <Typography
                     variant="body1"
@@ -102,10 +119,10 @@ const AboutSection = () => {
                   >
                     He trabajado en proyectos utilizando <strong>React</strong>{" "}
                     y su ecosistema (hooks, router, context), con herramientas
-                    modernas como
-                    <strong> Vite</strong> y <strong>Material-UI</strong>. Me
-                    interesa la arquitectura limpia, la experiencia del usuario
-                    y el diseño escalable de componentes.
+                    modernas como <strong>Vite</strong> y{" "}
+                    <strong>Material-UI</strong>. Me interesa la arquitectura
+                    limpia, la experiencia del usuario y el diseño escalable de
+                    componentes.
                   </Typography>
 
                   <Box>
