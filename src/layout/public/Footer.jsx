@@ -37,7 +37,7 @@ const Footer = () => {
         pb: 4,
         backgroundColor: "var(--color-bg)",
         color: "var(--color-text)",
-        borderTop: "1px solid var(--color-secondary)",
+        borderTop: "2px solid var(--color-accent)",
       }}
     >
       <Container maxWidth="lg">
@@ -64,10 +64,17 @@ const Footer = () => {
           {/* Íconos de redes sociales */}
           <Grid
             item
-            size={{ xs: 12 }}
+            size={{ xs: 12, md: 6 }}
             md="auto"
             textAlign={{ xs: "center", md: "right" }}
           >
+            <Typography
+              variant="subtitle1"
+              fontWeight={600}
+              textAlign={{ xs: "center", md: "center" }}
+            >
+              Redes
+            </Typography>
             <Stack direction="row" spacing={2} justifyContent="center">
               {Object.entries(config.socialLinks).map(([key, url]) => (
                 <IconButton
