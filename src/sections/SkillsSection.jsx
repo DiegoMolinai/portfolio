@@ -16,7 +16,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTheme } from "@mui/material/styles";
 import { useState } from "react";
 import { skills } from "../data/skills";
-import FadeInSection from "../components/FadeInSection"; // 👈 Importa animación
+import FadeInSection from "../components/FadeInSection";
 
 // Colores de contraste por color de fondo
 const contrastTextColor = {

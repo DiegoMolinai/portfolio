@@ -2,10 +2,11 @@ import { Box, Container, Typography, Button, Grid } from "@mui/material";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import config from "../config";
 import FadeInSection from "../components/FadeInSection";
+import profileImage from "../assets/heroSection/profile_1.png";
 
 const HeroSection = () => {
-  const imageSrc = "./assets/profile_1.png";
-  const hasImage = imageSrc !== "" && imageSrc !== null;
+  const imageSrc = profileImage;
+  const hasImage = !!imageSrc;
 
   return (
     <Box
@@ -21,7 +22,7 @@ const HeroSection = () => {
     >
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="center" justifyContent="center">
-          <Grid item xs={12} md={6} order={{ xs: 2, md: 1 }}>
+          <Grid item size={{ xs: 12, md: 6 }} order={{ xs: 2, md: 1 }}>
             <FadeInSection type="slideRight">
               <Typography
                 variant="h3"
@@ -64,25 +65,25 @@ const HeroSection = () => {
 
           <Grid
             item
-            xs={12}
-            md={6}
+            size={{ xs: 12, md: 6 }}
             order={{ xs: 1, md: 2 }}
             sx={{ textAlign: "center" }}
           >
             <FadeInSection type="fadeScale" delay={0.2}>
               {hasImage ? (
                 <Box
-                  component="img"
-                  src={imageSrc}
-                  alt="Ilustración de presentación"
-                  sx={{
-                    width: "100%",
-                    maxWidth: 500,
-                    mx: "auto",
-                    borderRadius: 3,
-                    border: "4px solid var(--color-accent)",
-                  }}
-                />
+                component="img"
+                src={imageSrc}
+                alt="Ilustración de presentación"
+                sx={{
+                  width: "100%",
+                  maxWidth: 500,
+                  mx: "auto",
+                  borderRadius: 3,
+                  border: "4px solid var(--color-accent)",
+                }}
+              />
+              
               ) : (
                 <InsertEmoticonIcon
                   sx={{ fontSize: 120, color: "var(--color-accent)" }}

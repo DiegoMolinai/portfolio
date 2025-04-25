@@ -18,7 +18,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import config from "../config";
 import FadeInSection from "../components/FadeInSection";
 import { useState } from "react";
-import ContactImage from "../../public/assets/ContactImage.jpg"; // ⚠️ Asegúrate que esta ruta sea válida
+import ContactImage from "../assets/contactSection/ContactImage.jpg";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({

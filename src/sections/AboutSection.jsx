@@ -12,10 +12,11 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { useTheme } from "@mui/material/styles";
 import config from "../config";
 import FadeInSection from "../components/FadeInSection";
+import aboutImage from "../assets/aboutSection/about-image.png";
 
 const AboutSection = () => {
-  const imageSrc = "./assets/about-image.png";
-  const hasImage = imageSrc !== "" && imageSrc !== null;
+  const imageSrc = aboutImage;
+  const hasImage = !!imageSrc;  
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
