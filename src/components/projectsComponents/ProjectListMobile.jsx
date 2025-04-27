@@ -38,15 +38,26 @@ const ProjectListMobile = ({ projects }) => {
             >
               {/* Imagen o icono */}
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon sx={{ color: "var(--color-accent)" }} />}
+                expandIcon={
+                  <ExpandMoreIcon
+                    sx={{
+                      color: "var(--color-accent)",
+                      fontSize: 30,
+                      transition: "all 0.3s ease",
+                    }}
+                  />
+                }
                 sx={{
                   flexDirection: "column",
-                  gap: 2,
+                  gap: 1,
+                  paddingY: 2,
+                  backgroundColor: "rgba(255, 255, 255, 0.05)", // leve fondo para diferenciar
                   "& .MuiAccordionSummary-content": {
                     width: "100%",
                     flexDirection: "column",
                     alignItems: "center",
                   },
+                  borderBottom: "2px solid var(--color-accent)", // separador más claro
                 }}
               >
                 {hasImage ? (
@@ -58,7 +69,6 @@ const ProjectListMobile = ({ projects }) => {
                       width: "100%",
                       height: 160,
                       objectFit: "cover",
-                      borderBottom: "2px solid var(--color-accent)",
                     }}
                   />
                 ) : (
@@ -70,18 +80,30 @@ const ProjectListMobile = ({ projects }) => {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      borderBottom: "2px solid var(--color-accent)",
                     }}
                   >
-                    <WorkOutlineIcon sx={{ fontSize: 60, color: "var(--color-accent)" }} />
+                    <WorkOutlineIcon
+                      sx={{ fontSize: 60, color: "var(--color-accent)" }}
+                    />
                   </Box>
                 )}
+
+                {/* Título */}
                 <Typography
                   variant="h6"
                   fontWeight={700}
                   sx={{ mt: 1, textAlign: "center" }}
                 >
                   {project.title}
+                </Typography>
+
+                {/* Subtexto de ayuda, SIEMPRE visible */}
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                  sx={{ textAlign: "center", fontSize: "0.75rem" }}
+                >
+                  Toca para ver más detalles
                 </Typography>
               </AccordionSummary>
 
@@ -96,13 +118,25 @@ const ProjectListMobile = ({ projects }) => {
                   sx={{ mb: 2 }}
                 >
                   {project.year && (
-                    <Chip label={`Año: ${project.year}`} size="small" color="success" />
+                    <Chip
+                      label={`Año: ${project.year}`}
+                      size="small"
+                      color="success"
+                    />
                   )}
                   {project.status && (
-                    <Chip label={`Estado: ${project.status}`} size="small" color="warning" />
+                    <Chip
+                      label={`Estado: ${project.status}`}
+                      size="small"
+                      color="warning"
+                    />
                   )}
                   {project.type && (
-                    <Chip label={`Tipo: ${project.type}`} size="small" color="secondary" />
+                    <Chip
+                      label={`Tipo: ${project.type}`}
+                      size="small"
+                      color="secondary"
+                    />
                   )}
                 </Stack>
 
