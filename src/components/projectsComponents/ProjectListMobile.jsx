@@ -1,67 +1,112 @@
+import { useState } from "react";
 import {
-    Box,
-    Stack,
-    Typography,
-    Chip,
-    Button
-  } from "@mui/material";
-  import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
-  import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-  
-  const ProjectListMobile = ({ projects }) => {
-    return (
-      <Stack spacing={6}>
-        {projects.map((project, index) => {
-          const hasImage = project.image && project.image !== "";
-          return (
-            <Box
-              key={index}
+  Box,
+  Typography,
+  Stack,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Button,
+  Chip,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
+import FadeInSection from "../FadeInSection"; // tu efecto fadeIn
+
+const ProjectListMobile = ({ projects }) => {
+  const [expandedIndex, setExpandedIndex] = useState(-1);
+
+  return (
+    <Stack spacing={3}>
+      {projects.map((project, index) => {
+        const hasImage = project.image && project.image !== "";
+        const isActive = expandedIndex === index;
+
+        return (
+          <FadeInSection key={index} type="fadeScale" delay={index * 0.1}>
+            <Accordion
+              expanded={expandedIndex === index}
+              onChange={() => setExpandedIndex(isActive ? -1 : index)}
               sx={{
-                backgroundColor: "#1e1e1e",
-                borderRadius: 4,
+                borderRadius: 2,
                 overflow: "hidden",
+                backgroundColor: "#1e1e1e",
                 border: "2px solid var(--color-accent)",
-                boxShadow: 3,
+                transition: "all 0.3s ease",
               }}
             >
-              {hasImage ? (
-                <Box
-                  component="img"
-                  src={project.image}
-                  alt={project.title}
-                  sx={{
+              {/* Imagen o icono */}
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon sx={{ color: "var(--color-accent)" }} />}
+                sx={{
+                  flexDirection: "column",
+                  gap: 2,
+                  "& .MuiAccordionSummary-content": {
                     width: "100%",
-                    height: 200,
-                    objectFit: "cover",
-                    borderBottom: "2px solid var(--color-accent)",
-                  }}
-                />
-              ) : (
-                <Box
-                  sx={{
-                    height: 200,
-                    display: "flex",
+                    flexDirection: "column",
                     alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "#2b2b2b",
-                    borderBottom: "2px solid var(--color-accent)",
-                  }}
+                  },
+                }}
+              >
+                {hasImage ? (
+                  <Box
+                    component="img"
+                    src={project.image}
+                    alt={project.title}
+                    sx={{
+                      width: "100%",
+                      height: 160,
+                      objectFit: "cover",
+                      borderBottom: "2px solid var(--color-accent)",
+                    }}
+                  />
+                ) : (
+                  <Box
+                    sx={{
+                      width: "100%",
+                      height: 160,
+                      backgroundColor: "#2b2b2b",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderBottom: "2px solid var(--color-accent)",
+                    }}
+                  >
+                    <WorkOutlineIcon sx={{ fontSize: 60, color: "var(--color-accent)" }} />
+                  </Box>
+                )}
+                <Typography
+                  variant="h6"
+                  fontWeight={700}
+                  sx={{ mt: 1, textAlign: "center" }}
                 >
-                  <WorkOutlineIcon sx={{ fontSize: 60, color: "var(--color-accent)" }} />
-                </Box>
-              )}
-  
-              <Box sx={{ p: 3 }}>
-                <Typography variant="h6" fontWeight={700} gutterBottom>
                   {project.title}
                 </Typography>
-  
-                <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" sx={{ mb: 2 }}>
-                  {project.year && <Chip label={`Año: ${project.year}`} size="small" color="primary" />}
-                  {project.status && <Chip label={`Estado: ${project.status}`} size="small" color="warning" />}
-                  {project.type && <Chip label={`Tipo: ${project.type}`} size="small" color="secondary" />}
+              </AccordionSummary>
+
+              {/* Contenido al abrir */}
+              <AccordionDetails sx={{ p: 2 }}>
+                {/* Chips de información */}
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  flexWrap="wrap"
+                  useFlexGap
+                  sx={{ mb: 2 }}
+                >
+                  {project.year && (
+                    <Chip label={`Año: ${project.year}`} size="small" color="success" />
+                  )}
+                  {project.status && (
+                    <Chip label={`Estado: ${project.status}`} size="small" color="warning" />
+                  )}
+                  {project.type && (
+                    <Chip label={`Tipo: ${project.type}`} size="small" color="secondary" />
+                  )}
                 </Stack>
-  
+
+                {/* Descripción */}
                 <Typography
                   variant="body2"
                   color="text.secondary"
@@ -69,40 +114,46 @@ import {
                 >
                   {project.description}
                 </Typography>
-  
+
+                {/* Tecnologías */}
                 {project.technologies?.length > 0 && (
-                  <Box sx={{ overflowX: "auto", whiteSpace: "nowrap", mb: 2 }}>
-                    <Stack direction="row" spacing={1}>
-                      {project.technologies.map((tech, i) => (
-                        <Chip
-                          key={i}
-                          label={tech}
-                          size="small"
-                          variant="outlined"
-                          sx={{
-                            backgroundColor: "#2e2e2e",
-                            color: "var(--color-text)",
-                            borderColor: "var(--color-accent)",
-                            whiteSpace: "nowrap",
-                          }}
-                        />
-                      ))}
-                    </Stack>
-                  </Box>
+                  <Stack
+                    direction="row"
+                    spacing={1}
+                    flexWrap="wrap"
+                    useFlexGap
+                    sx={{ mb: 2 }}
+                  >
+                    {project.technologies.map((tech, i) => (
+                      <Chip
+                        key={i}
+                        label={tech}
+                        size="small"
+                        variant="outlined"
+                        sx={{
+                          borderColor: "var(--color-accent)",
+                          color: "var(--color-text)",
+                          backgroundColor: "#2e2e2e",
+                        }}
+                      />
+                    ))}
+                  </Stack>
                 )}
-  
-                <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap">
+
+                {/* Botones */}
+                <Stack spacing={1} mt={2}>
                   {project.link && (
                     <Button
-                      size="small"
                       href={project.link}
                       target="_blank"
-                      fullWidth
                       variant="outlined"
+                      fullWidth
                       endIcon={<OpenInNewIcon />}
                       sx={{
                         color: "var(--color-accent)",
                         borderColor: "var(--color-accent)",
+                        textTransform: "none",
+                        fontWeight: 600,
                       }}
                     >
                       Ver sitio
@@ -110,28 +161,29 @@ import {
                   )}
                   {project.repo && (
                     <Button
-                      size="small"
                       href={project.repo}
                       target="_blank"
-                      fullWidth
                       variant="outlined"
+                      fullWidth
                       endIcon={<OpenInNewIcon />}
                       sx={{
                         color: "var(--color-accent)",
                         borderColor: "var(--color-accent)",
+                        textTransform: "none",
+                        fontWeight: 600,
                       }}
                     >
                       Repositorio
                     </Button>
                   )}
                 </Stack>
-              </Box>
-            </Box>
-          );
-        })}
-      </Stack>
-    );
-  };
-  
-  export default ProjectListMobile;
-  
+              </AccordionDetails>
+            </Accordion>
+          </FadeInSection>
+        );
+      })}
+    </Stack>
+  );
+};
+
+export default ProjectListMobile;
