@@ -57,76 +57,78 @@ const Header = () => {
           zIndex: 1100,
         }}
       >
-        <Container maxWidth="lg">
-          <Toolbar
-            disableGutters
-            sx={{ justifyContent: "space-between", minHeight: "64px" }}
+        <Toolbar
+          disableGutters
+          sx={{
+            justifyContent: "space-between",
+            minHeight: "64px",
+            px: { xs: 2, md: 4 },
+          }}
+        >
+          {/* 🔹 Logo / Nombre */}
+          <Typography
+            variant="h6"
+            fontWeight={700}
+            noWrap
+            sx={{
+              color: "var(--color-accent)",
+              letterSpacing: "0.8px",
+              fontSize: "1.3rem",
+            }}
           >
-            {/* 🔹 Logo / Nombre */}
-            <Typography
-              variant="h6"
-              fontWeight={700}
-              noWrap
-              sx={{
-                color: "var(--color-accent)",
-                letterSpacing: "0.8px",
-                fontSize: "1.3rem",
-              }}
-            >
-              {config.name}
-            </Typography>
+            {config.name}
+          </Typography>
 
-            {/* 🔹 Web Nav */}
-            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
-              {sections.map((section) => (
-                <Button
-                  key={section}
-                  onClick={() => scrollToSection(section)}
-                  sx={{
-                    color: "var(--color-text)",
-                    textTransform: "none",
-                    fontWeight: 600,
-                    fontSize: "1rem",
-                    position: "relative",
-                    padding: "6px 12px",
-                    borderRadius: "8px",
-                    transition: "all 0.3s ease",
-                    "&::before": {
-                      content: '""',
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      width: "0%",
-                      height: "2px",
-                      backgroundColor: "var(--color-accent)",
-                      transition: "width 0.3s",
-                    },
-                    "&:hover::before": {
-                      width: "100%",
-                    },
-                    "&:hover": {
-                      color: "var(--color-accent)",
-                      backgroundColor: "rgba(255,255,255,0.04)",
-                    },
-                  }}
-                >
-                  {section}
-                </Button>
-              ))}
-            </Box>
+          {/* 🔹 Web Nav */}
+          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
+            {sections.map((section) => (
+              <Button
+                key={section}
+                onClick={() => scrollToSection(section)}
+                sx={{
+                  color: "var(--color-text)",
+                  textTransform: "none",
+                  fontWeight: 600,
+                  fontSize: "1rem",
+                  position: "relative",
+                  padding: "6px 12px",
+                  borderRadius: "8px",
+                  transition: "all 0.3s ease",
+                  "&::before": {
+                    content: '""',
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    width: "0%",
+                    height: "2px",
+                    backgroundColor: "var(--color-accent)",
+                    transition: "width 0.3s",
+                  },
+                  "&:hover::before": {
+                    width: "100%",
+                  },
+                  "&:hover": {
+                    color: "var(--color-accent)",
+                    backgroundColor: "rgba(255,255,255,0.04)",
+                  },
+                }}
+              >
+                {section}
+              </Button>
+            ))}
+          </Box>
 
-            {/* 🔹 Mobile menu */}
-            <IconButton
-              edge="end"
-              color="inherit"
-              onClick={() => setOpen(true)}
-              sx={{ display: { xs: "flex", md: "none" } }}
-              aria-label="Abrir menú"
-            >
-              <MenuIcon />
-            </IconButton>
-          </Toolbar>
-        </Container>
+          {/* 🔹 Mobile menu */}
+          <IconButton
+            edge="end"
+            color="inherit"
+            onClick={() => setOpen(true)}
+            sx={{ display: { xs: "flex", md: "none" } }}
+            aria-label="Abrir menú"
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
       </AppBar>
 
       {/* 📱 DRAWER MOBILE */}
