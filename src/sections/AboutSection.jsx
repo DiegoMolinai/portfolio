@@ -27,7 +27,7 @@ const AboutSection = () => {
       component="section"
       sx={{
         padding: { xs: "4rem 1rem", md: "6rem 2rem" },
-        backgroundColor: "var(--color-bg)",
+        // backgroundColor: "var(--color-bg)",
         color: "var(--color-text)",
       }}
     >

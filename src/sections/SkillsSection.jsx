@@ -41,7 +41,7 @@ const SkillsSection = () => {
       component="section"
       sx={{
         minHeight: "100vh",
-        backgroundColor: "var(--color-bg)",
+        // backgroundColor: "var(--color-bg)",
         padding: { xs: "4rem 1rem", md: "6rem 2rem" },
         color: "var(--color-text)",
         display: "flex",

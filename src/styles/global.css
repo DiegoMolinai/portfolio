@@ -9,11 +9,15 @@
   box-sizing: border-box;
 }
 
-html,
+html {
+  height: 100%;
+  /* background-color: var(--color-bg); */
+}
+
 body {
   height: 100%;
   font-family: var(--font-primary);
-  background-color: var(--color-bg) !important;
+  /* background-color: var(--color-bg) !important; */
   color: var(--color-text) !important;
   line-height: 1.6;
   scroll-behavior: smooth;
@@ -61,4 +65,14 @@ input:-webkit-autofill {
   100% { transform: scale(1); }
 }
 
-
+@keyframes moveBackground {
+  0% {
+    background-position: 0% 50%, 100% 50%;
+  }
+  50% {
+    background-position: 50% 0%, 50% 100%;
+  }
+  100% {
+    background-position: 0% 50%, 100% 50%;
+  }
+}

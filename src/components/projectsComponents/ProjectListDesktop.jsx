@@ -40,7 +40,7 @@ const ProjectListDesktop = ({ projects, handleOpenDialog }) => {
                   border: "2px solid var(--color-accent)",
                   transition: "all 0.3s ease",
                   "&:hover": {
-                    transform: "scale(1.05)",
+                    transform: "scale(1.02)",
                     boxShadow: "0 0 15px var(--color-accent)",
                   },
                 }}

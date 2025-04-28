@@ -12,20 +12,16 @@ import {
   Grid,
   Paper,
 } from "@mui/material";
+import { useState } from "react";
 import EmailIcon from "@mui/icons-material/Email";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import config from "../config";
 import FadeInSection from "../components/FadeInSection";
-import { useState } from "react";
+import config from "../config";
 import ContactImage from "../assets/contactSection/ContactImage.jpg";
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -64,10 +60,7 @@ const ContactSection = () => {
     try {
       const response = await fetch("https://formspree.io/f/xgvaqydn", {
         method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
+        headers: { Accept: "application/json", "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
@@ -76,9 +69,7 @@ const ContactSection = () => {
         setSuccessMessage("¡Mensaje enviado correctamente!");
         setFormData({ name: "", email: "", message: "" });
       } else {
-        throw new Error(
-          result.error || "Hubo un problema al enviar el mensaje."
-        );
+        throw new Error(result.error || "Hubo un problema al enviar el mensaje.");
       }
     } catch (error) {
       setErrorMessage(error.message || "Error inesperado");
@@ -93,7 +84,7 @@ const ContactSection = () => {
       component="section"
       sx={{
         padding: { xs: "4rem 1rem", md: "6rem 2rem" },
-        backgroundColor: "var(--color-bg)",
+        // backgroundColor: "var(--color-bg)",
         color: "var(--color-text)",
       }}
     >
@@ -102,8 +93,8 @@ const ContactSection = () => {
           <Typography
             variant="h4"
             fontWeight={700}
-            gutterBottom
             textAlign="center"
+            gutterBottom
           >
             Contáctame
           </Typography>
@@ -122,155 +113,144 @@ const ContactSection = () => {
           container
           spacing={4}
           alignItems="stretch"
-          sx={{ minHeight: "500px" }} // 👈 fuerza igual altura
         >
           {/* 📝 Formulario */}
-          <Grid item size={{ xs: 12, md: 6 }} sx={{ height: "100%" }}>
-            <FadeInSection type="slideLeft" delay={0.2}>
-              <Paper
-                elevation={3}
-                sx={{
-                  height: "100%",
-                  minHeight: "500px",
-                  padding: 4,
-                  borderRadius: 3,
-                  backgroundColor: "#1e1e1e",
-                  border: "2px solid var(--color-accent)",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                }}
-              >
-                <Typography variant="body1" sx={{ mb: 3 }}>
-                  ¿Tienes un proyecto en mente? ¡Cuéntamelo! 🚀
-                </Typography>
+          <Grid item size={{ xs: 12, md: 6 }}>
+            <Paper
+              elevation={3}
+              sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                padding: { xs: 3, md: 5 },
+                backgroundColor: "#1e1e1e",
+                color: "var(--color-text)",
+                borderRadius: 3,
+                border: "2px solid var(--color-accent)",
+                gap: 2,
+              }}
+            >
+              <Typography variant="h5" fontWeight={700}>
+                ¿Te gustaría trabajar conmigo?
+              </Typography>
 
-                <form onSubmit={handleSubmit}>
-                  <Stack spacing={2}>
-                    <TextField
-                      fullWidth
-                      label="Nombre"
-                      name="name"
-                      variant="outlined"
-                      color="success"
-                      value={formData.name}
-                      onChange={handleChange}
-                      error={!!errors.name}
-                      helperText={errors.name}
-                    />
-                    <TextField
-                      fullWidth
-                      label="Correo electrónico"
-                      name="email"
-                      variant="outlined"
-                      color="success"
-                      value={formData.email}
-                      onChange={handleChange}
-                      error={!!errors.email}
-                      helperText={errors.email}
-                    />
-                    <TextField
-                      fullWidth
-                      label="Mensaje"
-                      name="message"
-                      multiline
-                      rows={4}
-                      variant="outlined"
-                      color="success"
-                      value={formData.message}
-                      onChange={handleChange}
-                      error={!!errors.message}
-                      helperText={errors.message}
-                    />
+              <Typography variant="body2" color="text.secondary">
+                Estoy disponible para nuevos proyectos freelance. ¡Te responderé en menos de 24 horas!
+              </Typography>
 
-                    {loading ? (
-                      <Button
-                        fullWidth
-                        variant="contained"
-                        color="success"
-                        disabled
-                      >
-                        <CircularProgress size={24} color="inherit" />
-                      </Button>
-                    ) : (
-                      <Button
-                        fullWidth
-                        variant="contained"
-                        color="success"
-                        type="submit"
-                      >
-                        Enviar mensaje
-                      </Button>
-                    )}
+              <form onSubmit={handleSubmit}>
+                <Stack spacing={2} sx={{ mt: 2 }}>
+                  <TextField
+                    label="Nombre"
+                    name="name"
+                    fullWidth
+                    variant="outlined"
+                    color="success"
+                    value={formData.name}
+                    onChange={handleChange}
+                    error={!!errors.name}
+                    helperText={errors.name}
+                  />
+                  <TextField
+                    label="Correo electrónico"
+                    name="email"
+                    fullWidth
+                    variant="outlined"
+                    color="success"
+                    value={formData.email}
+                    onChange={handleChange}
+                    error={!!errors.email}
+                    helperText={errors.email}
+                  />
+                  <TextField
+                    label="Mensaje"
+                    name="message"
+                    multiline
+                    rows={4}
+                    fullWidth
+                    variant="outlined"
+                    color="success"
+                    value={formData.message}
+                    onChange={handleChange}
+                    error={!!errors.message}
+                    helperText={errors.message}
+                  />
 
-                    {successMessage && (
-                      <Alert severity="success">{successMessage}</Alert>
-                    )}
-                    {errorMessage && (
-                      <Alert severity="error">{errorMessage}</Alert>
-                    )}
-                  </Stack>
-                </form>
-              </Paper>
-            </FadeInSection>
+                  {/* Alertas */}
+                  {successMessage && <Alert severity="success">{successMessage}</Alert>}
+                  {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+
+                  {/* Botón */}
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="success"
+                    sx={{ fontWeight: "bold", textTransform: "none" }}
+                    disabled={loading}
+                  >
+                    {loading ? <CircularProgress size={24} color="inherit" /> : "Enviar mensaje"}
+                  </Button>
+                </Stack>
+              </form>
+            </Paper>
           </Grid>
 
-          {/* 🖼️ Imagen con info */}
-          <Grid item size={{ xs: 12, md: 6 }} sx={{ height: "100%" }}>
-            <FadeInSection type="fadeScale" delay={0.4}>
+          {/* 🖼️ Imagen + Texto */}
+          <Grid item size={{ xs: 12, md: 6 }}>
+            <Paper
+              elevation={3}
+              sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                borderRadius: 3,
+                overflow: "hidden",
+                backgroundColor: "#1e1e1e",
+                border: "2px solid var(--color-accent)",
+              }}
+            >
+              {/* Imagen */}
               <Box
                 sx={{
-                  height: "100%",
-                  minHeight: "500px",
-                  borderRadius: 3,
-                  overflow: "hidden",
-                  position: "relative",
+                  flex: 1,
                   backgroundImage: `url(${ContactImage})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
+                }}
+              />
+
+              {/* Pie de contacto */}
+              <Box
+                sx={{
+                  p: 3,
+                  backgroundColor: "#151515",
+                  color: "#fff",
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "flex-end", // o center si prefieres
-                  border: "2px solid var(--color-accent)",
+                  gap: 1,
                 }}
               >
-                <Box
-                  sx={{
-                    width: "100%",
-                    backgroundColor: "rgba(0,0,0,0.6)",
-                    p: 3,
-                    color: "#fff",
-                  }}
-                >
-                  <Typography variant="h6" fontWeight={600}>
-                    ¡Conectemos!
-                  </Typography>
-                  <Typography variant="body2" sx={{ mb: 2 }}>
-                    Estoy disponible para proyectos freelance, colaboraciones y
-                    desafíos creativos.
-                  </Typography>
-                  <Stack direction="row" spacing={2}>
-                    <Link href={`mailto:${config.email}`} color="inherit">
-                      <EmailIcon />
-                    </Link>
-                    <Link
-                      href={config.socialLinks.github}
-                      target="_blank"
-                      color="inherit"
-                    >
-                      <GitHubIcon />
-                    </Link>
-                    <Link
-                      href={config.socialLinks.linkedin}
-                      target="_blank"
-                      color="inherit"
-                    >
-                      <LinkedInIcon />
-                    </Link>
-                  </Stack>
-                </Box>
+                <Typography variant="h6" fontWeight={700}>
+                  ¡Conectemos!
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Siempre abierto a nuevos desafíos y colaboraciones. ¡Hablemos!
+                </Typography>
+                <Stack direction="row" spacing={2} mt={2}>
+                  <Link href={`mailto:${config.email}`} color="inherit">
+                    <EmailIcon />
+                  </Link>
+                  <Link href={config.socialLinks.github} target="_blank" color="inherit">
+                    <GitHubIcon />
+                  </Link>
+                  <Link href={config.socialLinks.linkedin} target="_blank" color="inherit">
+                    <LinkedInIcon />
+                  </Link>
+                </Stack>
               </Box>
-            </FadeInSection>
+            </Paper>
           </Grid>
         </Grid>
       </Container>

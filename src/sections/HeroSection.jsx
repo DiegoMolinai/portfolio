@@ -16,7 +16,7 @@ const HeroSection = () => {
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        backgroundColor: "var(--color-bg)",
+        // backgroundColor: "var(--color-bg)",
         padding: { xs: "4rem 1rem", md: "6rem 2rem" },
       }}
     >
