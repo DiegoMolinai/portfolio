@@ -9,64 +9,61 @@
   box-sizing: border-box;
 }
 
-html {
-  height: auto; /* ✅ */
-  min-height: 100%; /* ✅ */
-  /* background-color: var(--color-bg); */
+html, body, #root {
+  min-height: 100dvh; /* ✅ Viewport dinámico */
+  height: auto; /* ✅ Permitir que crezca */
+  background-color: transparent; /* ✅ Dejar ver el AnimatedBackground */
+  overflow-x: hidden;
 }
 
 body {
-  min-height: 100vh; /* ✅ */
   font-family: var(--font-primary);
-  /* background-color: var(--color-bg); */
   color: var(--color-text);
   line-height: 1.6;
   scroll-behavior: smooth;
-  overflow-x: hidden;
-  background-attachment: fixed; /* 🔥 Para Safari mobile */
+  -webkit-font-smoothing: antialiased; /* ✅ Mejoras visuales */
+  -moz-osx-font-smoothing: grayscale;
+  background-attachment: fixed; /* 🔥 Importante para que no parpadee en iOS */
 }
-
 
 main {
-  min-height: 100vh;
+  min-height: 100vh; /* Mantener altura mínima de la vista */
 }
 
-
-/* Mejora compatibilidad de tipografía */
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
+/* Links */
 a {
   text-decoration: none;
   color: inherit;
 }
 
+/* Imágenes */
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
+/* Inputs y botones */
 button, input, textarea {
   font-family: inherit;
   color: var(--color-text);
   background-color: transparent;
 }
 
-/* Forzar fondo blanco en formularios de autocompletado */
+/* Forzar fondo en autocompletado de formularios */
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px var(--color-bg) inset !important;
   -webkit-text-fill-color: var(--color-text) !important;
 }
 
+/* Pequeñas animaciones extra si usas */
 @keyframes pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.08); }
   100% { transform: scale(1); }
 }
 
+/* Fondo animado para AnimatedBackground */
 @keyframes moveBackground {
   0% {
     background-position: 0% 50%, 100% 50%;
