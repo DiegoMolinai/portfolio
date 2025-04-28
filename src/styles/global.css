@@ -10,23 +10,25 @@
 }
 
 html {
-  height: 100%;
+  height: auto; /* ✅ */
+  min-height: 100%; /* ✅ */
   /* background-color: var(--color-bg); */
 }
 
 body {
-  height: 100%;
+  min-height: 100vh; /* ✅ */
   font-family: var(--font-primary);
-  /* background-color: var(--color-bg) !important; */
-  color: var(--color-text) !important;
+  /* background-color: var(--color-bg); */
+  color: var(--color-text);
   line-height: 1.6;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  background-attachment: fixed; /* 🔥 Para Safari mobile */
 }
+
 
 main {
   min-height: 100vh;
-  overflow: unset;
 }
 
 
