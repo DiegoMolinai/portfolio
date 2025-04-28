@@ -11,7 +11,7 @@ const AnimatedBackground = () => {
         top: 0,
         left: 0,
         width: "100%",
-        minHeight: "100%", // cambiamos height por minHeight
+        minHeight: "100dvh", // cambiamos height por minHeight
         zIndex: -1,
         background: `
           radial-gradient(ellipse at 30% 40%, #5bbf6244, transparent 60%),
