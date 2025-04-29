@@ -33,6 +33,11 @@ const FadeInSection = ({ children, delay = 0.15, type = "fadeUp" }) => {
       whileInView="visible"
       viewport={{ once: false, amount: 0.2 }}
       transition={{ duration: 0.6, delay }}
+      style={{
+        height: "100%",          // ⬅️ Esto asegura que respete el 100% de altura
+        display: "flex",          // ⬅️ Opcionalmente para que siga el layout de Box y Paper
+        flexDirection: "column",  // ⬅️ Especialmente para estructuras tipo columna (como tu imagen + footer de contacto)
+      }}
     >
       {children}
     </motion.div>
