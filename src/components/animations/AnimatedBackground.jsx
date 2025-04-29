@@ -7,11 +7,13 @@ const AnimatedBackground = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 2 }}
       style={{
-        position: "fixed", // mantenemos fixed
+        position: "fixed",
         top: 0,
         left: 0,
+        right: 0,
+        bottom: 0, // ¡🔥 Importante para evitar gaps!
         width: "100%",
-        minHeight: "100dvh", // cambiamos height por minHeight
+        height: "100%", // ✅ NO usar 100vh ni 100dvh
         zIndex: -1,
         background: `
           radial-gradient(ellipse at 30% 40%, #5bbf6244, transparent 60%),
@@ -21,6 +23,7 @@ const AnimatedBackground = () => {
         backgroundSize: "180% 180%",
         backgroundRepeat: "no-repeat",
         animation: "moveBackground 40s infinite alternate-reverse ease-in-out",
+        pointerEvents: "none", // ✅ para evitar capturar clicks
       }}
     />
   );
