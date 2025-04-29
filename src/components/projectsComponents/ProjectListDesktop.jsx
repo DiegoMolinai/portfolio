@@ -16,7 +16,7 @@ import FadeInSection from "../FadeInSection";
 
 const ProjectListDesktop = ({ projects, handleOpenDialog }) => {
   return (
-    <Grid container spacing={2} justifyContent="space-around">
+    <Grid container spacing={3} justifyContent="center">
       {projects.map((project, index) => {
         const hasImage = project.image && project.image !== "";
 
@@ -27,27 +27,34 @@ const ProjectListDesktop = ({ projects, handleOpenDialog }) => {
             size={{ xs: 12, sm: 6, md: 4 }}
             sx={{ display: "flex" }}
           >
-            <FadeInSection type="fadeScale" delay={index * 0.15}>
+            <FadeInSection type="fadeScale" delay={index * 0.1}>
               <Card
                 sx={{
                   backgroundColor: "#1e1e1e",
+                  color: "var(--color-text)",
                   height: "100%",
                   width: "100%",
                   display: "flex",
                   flexDirection: "column",
-                  borderRadius: 3,
+                  borderRadius: "16px",
                   overflow: "hidden",
                   border: "2px solid var(--color-accent)",
-                  transition: "all 0.3s ease",
+                  transition: "all 0.4s ease",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
                   "&:hover": {
-                    transform: "scale(1.02)",
-                    boxShadow: "0 0 15px var(--color-accent)",
+                    transform: "scale(1.03)",
+                    boxShadow: `0 0 20px var(--color-accent)`,
+                    borderColor: "var(--color-accent-hover)",
                   },
                 }}
               >
                 <Box
                   onClick={() => handleOpenDialog(project)}
-                  sx={{ cursor: "pointer" }}
+                  sx={{
+                    cursor: "pointer",
+                    position: "relative",
+                    overflow: "hidden",
+                  }}
                 >
                   {hasImage ? (
                     <CardMedia
@@ -55,7 +62,14 @@ const ProjectListDesktop = ({ projects, handleOpenDialog }) => {
                       height="180"
                       image={project.image}
                       alt={project.title}
-                      sx={{ borderBottom: "2px solid var(--color-accent)" }}
+                      sx={{
+                        objectFit: "cover",
+                        filter: "brightness(0.9)",
+                        transition: "all 0.3s ease",
+                        "&:hover": {
+                          filter: "brightness(1)",
+                        },
+                      }}
                     />
                   ) : (
                     <Box
@@ -65,7 +79,6 @@ const ProjectListDesktop = ({ projects, handleOpenDialog }) => {
                         alignItems: "center",
                         justifyContent: "center",
                         backgroundColor: "#2b2b2b",
-                        borderBottom: "2px solid var(--color-accent)",
                       }}
                     >
                       <WorkOutlineIcon
@@ -77,68 +90,108 @@ const ProjectListDesktop = ({ projects, handleOpenDialog }) => {
 
                 <CardContent
                   onClick={() => handleOpenDialog(project)}
-                  sx={{ minHeight: 180, cursor: "pointer" }}
+                  sx={{
+                    flexGrow: 1,
+                    cursor: "pointer",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    p: 3,
+                    "& .project-title": {
+                      transition: "all 0.3s ease",
+                    },
+                    "&:hover .project-title": {
+                      color: "var(--color-accent)",
+                      textShadow: "0 0 6px var(--color-accent-hover)",
+                    },
+                  }}
                 >
-                  <Typography variant="h6" fontWeight={600} gutterBottom>
-                    {project.title}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{
-                      display: "-webkit-box",
-                      WebkitBoxOrient: "vertical",
-                      WebkitLineClamp: 3,
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      minHeight: "4.5em",
-                      lineHeight: "1.5em",
-                    }}
-                  >
-                    {project.description}
-                  </Typography>
-
-                  {project.technologies?.length > 0 && (
-                    <Stack
-                      direction="row"
-                      spacing={1}
-                      mt={2}
-                      flexWrap="wrap"
-                      useFlexGap
+                  <Box>
+                    <Typography
+                      variant="h6"
+                      fontWeight={700}
+                      gutterBottom
+                      className="project-title"
+                      sx={{
+                        color: "var(--color-text)", // normal (sin glow)
+                      }}
                     >
-                      {project.technologies.map((tech, i) => (
-                        <Chip
-                          key={i}
-                          label={tech}
-                          size="small"
-                          variant="outlined"
-                          sx={{
-                            backgroundColor: "#2e2e2e",
-                            color: "var(--color-text)",
-                            borderColor: "var(--color-accent)",
-                          }}
-                        />
-                      ))}
-                    </Stack>
-                  )}
+                      {project.title}
+                    </Typography>
+
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{
+                        display: "-webkit-box",
+                        WebkitBoxOrient: "vertical",
+                        WebkitLineClamp: 3,
+                        overflow: "hidden",
+                        minHeight: "4.5em",
+                        mb: 2,
+                      }}
+                    >
+                      {project.description}
+                    </Typography>
+
+                    {project.technologies?.length > 0 && (
+                      <Stack
+                        direction="row"
+                        spacing={1}
+                        flexWrap="wrap"
+                        useFlexGap
+                        sx={{ mt: 1 }}
+                      >
+                        {project.technologies.map((tech, i) => (
+                          <Chip
+                            key={i}
+                            label={tech}
+                            size="small"
+                            variant="outlined"
+                            sx={{
+                              borderColor: "var(--color-accent)",
+                              color: "var(--color-text)",
+                              fontSize: "0.75rem",
+                              backgroundColor: "#2e2e2e",
+                              "&:hover": {
+                                backgroundColor: "var(--color-accent-hover)",
+                                color: "#000",
+                                fontWeight: 600,
+                              },
+                            }}
+                          />
+                        ))}
+                      </Stack>
+                    )}
+                  </Box>
                 </CardContent>
 
                 <CardActions
                   sx={{
-                    mt: "auto",
-                    px: 2,
+                    p: 2,
                     borderTop: "2px solid var(--color-accent)",
-                    justifyContent: "space-around",
+                    backgroundColor: "#151515",
+                    justifyContent: "space-between",
+                    gap: 1,
                   }}
                 >
                   {project.link && (
                     <Button
                       size="small"
-                      variant="contained"
+                      variant="outlined"
                       href={project.link}
                       target="_blank"
                       endIcon={<OpenInNewIcon />}
-                      sx={{ border: "2px solid var(--color-accent)" }}
+                      sx={{
+                        borderColor: "var(--color-accent)",
+                        color: "var(--color-accent)",
+                        fontWeight: 600,
+                        "&:hover": {
+                          backgroundColor: "var(--color-accent-hover)",
+                          color: "#000",
+                          borderColor: "var(--color-accent-hover)",
+                        },
+                      }}
                     >
                       Ver sitio
                     </Button>
@@ -146,11 +199,20 @@ const ProjectListDesktop = ({ projects, handleOpenDialog }) => {
                   {project.repo && (
                     <Button
                       size="small"
-                      variant="contained"
+                      variant="outlined"
                       href={project.repo}
                       target="_blank"
                       endIcon={<OpenInNewIcon />}
-                      sx={{ border: "2px solid var(--color-accent)" }}
+                      sx={{
+                        borderColor: "var(--color-accent)",
+                        color: "var(--color-accent)",
+                        fontWeight: 600,
+                        "&:hover": {
+                          backgroundColor: "var(--color-accent-hover)",
+                          color: "#000",
+                          borderColor: "var(--color-accent-hover)",
+                        },
+                      }}
                     >
                       Repositorio
                     </Button>

@@ -96,6 +96,7 @@ const ProjectsSection = () => {
                 borderRadius: 4,
                 overflow: "hidden",
                 boxShadow: "0 0 30px rgba(0,0,0,0.5)",
+                border: "2px solid var(--color-accent)",
               },
             }}
           >
@@ -109,7 +110,7 @@ const ProjectsSection = () => {
                 backgroundColor: "#1a1a1a",
               }}
             >
-              {selectedProject.link && (
+              {/* {selectedProject.link && (
                 <Button
                   href={selectedProject.link}
                   target="_blank"
@@ -136,7 +137,7 @@ const ProjectsSection = () => {
                 >
                   Repositorio
                 </Button>
-              )}
+              )} */}
               <Button onClick={handleCloseDialog} variant="contained" color="error">
                 Cerrar
               </Button>
